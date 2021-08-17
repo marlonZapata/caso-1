@@ -1,0 +1,25 @@
+CREATE VIEW vuelosDiarios AS
+SELECT dia, COUNT(dia) AS cuenta 
+FROM vuelo
+GROUP BY dia;
+
+SELECT *
+FROM vuelosDiarios 
+ORDER BY cuenta DESC
+LIMIT 5;
+
+SELECT *
+FROM vuelosDiarios 
+ORDER BY cuenta ASC
+LIMIT 5
+
+SELECT dia, COUNT(dia) vuelosTotales
+FROM flies_table
+GROUP BY dia
+ORDER BY vuelosTotales DESC;
+
+
+SELECT dia, COUNT(dia) vuelosTotales
+FROM flies_table
+GROUP BY dia
+ORDER BY vuelosTotales ASC;

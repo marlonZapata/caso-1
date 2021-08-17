@@ -1,0 +1,18 @@
+USE airline;
+
+CREATE VIEW topPaisOrigen AS
+SELECT id_pais_origen, COUNT(id_pais_origen) AS cuenta 
+FROM DETALLE_VUELO
+GROUP BY id_pais_origen
+ORDER BY DESC;
+
+SELECT PAIS.nombre, topPaisOrigen.cuenta
+FROM topPaisOrigen 
+JOIN PAIS 
+ON PAIS.id_pais = topPaisOrigen.id_pais_origen
+LIMIT 5;
+
+SELECT id_pais_origen, count(id_pais_origen) as vuelosTotales
+FROM flies_table
+GROUP BY id_pais_origen
+ORDER BY vuelosTotales DESC;

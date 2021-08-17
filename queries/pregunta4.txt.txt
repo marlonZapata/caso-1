@@ -1,0 +1,28 @@
+CREATE VIEW retrasosDiarios AS
+SELECT vuelo.dia AS dia, SUM(vuelo_retraso.retraso) AS minutos_totales
+FROM vuelo 
+JOIN vuelo_retraso
+ON vuelo.id_vuelo = vuelo_retraso.id_vuelo
+GROUP BY vuelo.dia;
+
+SELECT * 
+FROM retrasosDiarios 
+ORDER BY minutos_totales DESC
+LIMIT 5;
+
+SELECT * 
+FROM retrasosDiarios 
+ORDER BY minutos_totales ASC
+LIMIT 5;
+
+SELECT dia, SUM(retraso) as retrasoDiario
+FROM flies_table
+GROUP BY dia
+ORDER BY retrasoDiario DESC
+LIMIT 5;
+
+SELECT dia, SUM(retraso) as retrasoDiario
+FROM flies_table
+GROUP BY dia
+ORDER BY retrasoDiario ASC
+LIMIT 5;

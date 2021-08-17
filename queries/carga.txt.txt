@@ -1,0 +1,24 @@
+hdfs dfs -mkdir /user/UDF/
+
+hadoop fs -copyFromLocal /home/training/training_materials/data/airline/transformed_retrasos.dat /user/training/airline/data/
+
+CREATE TABLE IF NOT EXISTS VUELO(id_vuelo int, dia int) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '_';
+LOAD DATA INPATH '/user/training/airline/data/fecha.dat' INTO TABLE VUELO;
+
+
+CREATE TABLE IF NOT EXISTS PAIS(id_pais varchar(10), nombre varchar(30)) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY ';'; 
+LOAD DATA INPATH '/user/training/airline/data/paises.ada' INTO TABLE PAIS;
+
+CREATE TABLE IF NOT EXISTS DETALLE_VUELO(id_vuelo int, id_pais_origen varchar(10), id_pais_destino varchar(10)) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '|'; 
+LOAD DATA INPATH '/user/training/airline/data/vuelos.dat' INTO TABLE DETALLE_VUELO;
+
+CREATE TABLE IF NOT EXISTS VUELO_RETRASO(id_vuelo int, retraso int) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY ';'; 
+LOAD DATA INPATH '/user/training/airline/data/transformed_retrasos.dat' INTO TABLE VUELO_RETRASO;

@@ -1,0 +1,2 @@
+SELECT id_pais_origen, dia, retraso, SUM(retraso) OVER(PARTITION BY id_pais_origen ORDER BY dia) AS retraso_acumulado
+FROM flies_table;

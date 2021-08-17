@@ -1,0 +1,24 @@
+hadoop fs -copyFromLocal /home/training/training_materials/jars/is_vip.jar /user/UDF/
+
+ADD JAR hdfs:///user/UDF/is_vip.jar;
+
+CREATE TEMPORARY FUNCTION isVip
+AS 'UDF.IsVip';
+
+SELECT id_pais_origen, isVip(id_pais_origen) AS paises_vip
+FROM (
+	SELECT dia, SUM(retraso) as retrasoDiario
+	FROM flies_table
+	GROUP BY dia
+)
+ORDER BY retrasoDiario DESC
+LIMIT 5;
+
+SELECT id_pais_origen, isVip(id_pais_origen) AS paises_vip
+FROM (
+	SELECT dia, SUM(retraso) as retrasoDiario
+	FROM flies_table
+	GROUP BY dia
+)
+ORDER BY retrasoDiario ASC
+LIMIT 5;

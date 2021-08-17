@@ -1,0 +1,21 @@
+CREATE VIEW peru AS
+SELECT
+a.dia,
+a.id_pais_origen,
+a.id_pais_destino,
+isVip(a.id_pais_origen),
+isVip(a.id_pais_destino),
+a.retraso
+FROM flies_table a
+WHERE a.id_pais_origen = "PER";
+
+CREATE VIEW mexico AS
+SELECT
+a.dia,
+a.id_pais_origen,
+a.id_pais_destino,
+isVip(a.id_pais_origen),
+isVip(a.id_pais_destino),
+a.retraso
+FROM flies_table a
+WHERE a.id_pais_origen = "MEX";
